@@ -6,35 +6,117 @@
     <title>HSE Plus Two Countdown 2026</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --accent: #d9534f;
+            --primary: #4e73df;
+            --accent: #e74a3b;
+            --success: #1cc88a;
             --bg: #f8fafc;
         }
-        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        body { 
+            font-family: 'Poppins', system-ui, -apple-system, sans-serif; 
+            background: var(--bg); 
+            margin: 0; 
+            padding: 15px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
         
-        .card { background: white; padding: 1.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; width: 100%; max-width: 450px; margin-bottom: 20px; border-top: 6px solid var(--primary); box-sizing: border-box; }
-        #timer { font-size: 2.2rem; font-weight: 800; color: var(--accent); letter-spacing: -1px; margin: 10px 0; }
-        #exam-name { font-size: 1.1rem; color: #64748b; font-weight: 500; }
+        /* Main Timer Card */
+        .card { 
+            background: white; 
+            padding: 2rem; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            text-align: center; 
+            width: 100%; 
+            max-width: 450px; 
+            margin-bottom: 25px; 
+            border-top: 6px solid var(--primary); 
+            box-sizing: border-box; 
+        }
+        
+        h2 { color: #333; margin-top: 0; font-size: 1.5rem; }
+        
+        #timer { 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            color: var(--accent); 
+            letter-spacing: -1px; 
+            margin: 15px 0;
+            font-variant-numeric: tabular-nums;
+        }
+        
+        #exam-name { 
+            font-size: 1.1rem; 
+            color: #4e73df; 
+            font-weight: 700; 
+            background: #f0f3ff;
+            padding: 5px 15px;
+            border-radius: 50px;
+            display: inline-block;
+        }
 
-        .table-container { width: 100%; max-width: 600px; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); overflow: hidden; border: 1px solid #e2e8f0; }
+        /* Table Styling */
+        .table-container { 
+            width: 100%; 
+            max-width: 500px; 
+            background: white; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+            overflow: hidden; 
+            border: 1px solid #e2e8f0; 
+        }
+        
         table { border-collapse: collapse; width: 100%; }
-        th { background: var(--primary); color: white; padding: 12px; text-align: left; font-size: 0.8rem; text-transform: uppercase; }
-        td { padding: 12px; border-bottom: 1px solid #edf2f7; font-size: 0.9rem; }
+        th { background: #f8f9fc; color: #4e73df; padding: 15px; text-align: left; font-size: 0.75rem; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 14px 15px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; color: #444; }
 
-        .next-exam-row { background-color: #eff6ff !important; font-weight: 600; }
-        .days-tag { font-size: 0.7rem; padding: 4px 8px; border-radius: 12px; background: #f1f5f9; white-space: nowrap; display: inline-block; }
-        .next-exam-row .days-tag { background: var(--primary); color: white; }
+        .next-exam-row { background-color: #f0f7ff !important; font-weight: 700; }
+        .days-tag { font-size: 0.7rem; padding: 4px 10px; border-radius: 12px; background: #f1f5f9; font-weight: 600; }
+        .next-exam-row .days-tag { background: var(--success); color: white; }
+
+        /* Smooth Wave Animation for Footer */
+        .footer-section {
+            margin-top: 30px;
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        .divider { height: 1.5px; width: 80%; background: #ddd; margin: 20px auto; }
+
+        .bounce-box { margin: 15px 0; }
+        .bounce-box span {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 900;
+            font-family: 'Arial Black', sans-serif;
+            display: inline-block;
+            animation: smoothBounce 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+        }
+
+        /* Staggered wave timing */
+        .bounce-box span:nth-child(2) { animation-delay: 0.1s; }
+        .bounce-box span:nth-child(3) { animation-delay: 0.2s; }
+        .bounce-box span:nth-child(4) { animation-delay: 0.3s; }
+        .bounce-box span:nth-child(5) { animation-delay: 0.4s; }
+        .bounce-box span:nth-child(6) { animation-delay: 0.5s; }
+
+        @keyframes smoothBounce {
+            0% { transform: translateY(0); text-shadow: 0 0px 0 #ccc; }
+            100% { transform: translateY(-10px); text-shadow: 0 1px 0 #ccc, 0 5px 10px rgba(0,0,0,0.1); }
+        }
 
         @media (max-width: 480px) {
-            #timer { font-size: 1.8rem; }
-            td, th { padding: 10px 8px; font-size: 0.85rem; }
+            #timer { font-size: 2rem; }
+            .card { padding: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h2>Plus Two Exam Countdown</h2>
+        <h2>Exam Countdown 2026</h2>
         <div id="exam-name">Loading...</div>
         <div id="timer">00d 00h 00m 00s</div>
     </div>
@@ -43,7 +125,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Date</th>
+                    <th>Exam Date</th>
                     <th>Subject</th>
                     <th>Status</th>
                 </tr>
@@ -52,15 +134,24 @@
         </table>
     </div>
 
+    <div class="footer-section">
+        <div class="divider"></div>
+        <div style="font-size: 12px; color: #888; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">Developed By</div>
+        <div class="bounce-box">
+            <span>M</span><span>I</span><span>N</span><span>H</span><span>A</span><span>J</span>
+        </div>
+        <div style="color: #666; font-size: 13px; font-weight: 600;">Plus Two Result Portal &copy; 2026</div>
+        <div class="divider"></div>
+    </div>
+
     <script>
-        // Data strictly for Plus Two exams only
         const exams = [
-            { date: "2026-03-10T09:00:00", name: "Business Studies" },
-            { date: "2026-03-12T09:00:00", name: "Second Language" },
-            { date: "2026-03-19T09:00:00", name: "Economics" },
-            { date: "2026-03-24T09:00:00", name: "Computer Application" },
-            { date: "2026-03-26T09:00:00", name: "Accountancy" },
-            { date: "2026-03-28T09:00:00", name: "English (Part I)" }
+            { date: "2026-03-10T09:30:00", name: "Business Studies" },
+            { date: "2026-03-12T09:30:00", name: "Second Language" },
+            { date: "2026-03-19T09:30:00", name: "Economics" },
+            { date: "2026-03-24T09:30:00", name: "Computer Application" },
+            { date: "2026-03-26T09:30:00", name: "Accountancy" },
+            { date: "2026-03-28T09:30:00", name: "English (Part I)" }
         ];
 
         function updateUI() {
@@ -68,6 +159,7 @@
             const tableBody = document.getElementById('table-body');
             let nextExam = exams.find(e => new Date(e.date) > now);
 
+            // Update table only when needed
             if (tableBody.innerHTML === "" || now.getSeconds() === 0) {
                 tableBody.innerHTML = '';
                 exams.forEach(e => {
@@ -77,7 +169,7 @@
                     const diffTime = examDate - now;
                     const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                     
-                    let status = isPast ? "Done" : `<span class="days-tag">${daysLeft}d left</span>`;
+                    let status = isPast ? "<span style='color:#94a3b8'>Completed</span>" : `<span class="days-tag">${daysLeft} days to go</span>`;
                     
                     tableBody.innerHTML += `
                         <tr class="${isNext ? 'next-exam-row' : ''}" style="${isPast ? 'opacity:0.5' : ''}">
@@ -94,11 +186,19 @@
                 const h = Math.floor((diff % 86400000) / 3600000);
                 const m = Math.floor((diff % 3600000) / 60000);
                 const s = Math.floor((diff % 60000) / 1000);
-                document.getElementById('timer').innerText = `${d}d ${h}h ${m}m ${s}s`;
-                document.getElementById('exam-name').innerText = "Next: " + nextExam.name;
+                
+                // Adding leading zeros for a cleaner look
+                const displayD = d.toString().padStart(2, '0');
+                const displayH = h.toString().padStart(2, '0');
+                const displayM = m.toString().padStart(2, '0');
+                const displayS = s.toString().padStart(2, '0');
+                
+                document.getElementById('timer').innerText = `${displayD}d ${displayH}h ${displayM}m ${displayS}s`;
+                document.getElementById('exam-name').innerText = "Target: " + nextExam.name;
             } else {
-                document.getElementById('timer').innerText = "Exams Finished!";
-                document.getElementById('exam-name').innerText = "Congratulations!";
+                document.getElementById('timer').innerText = "All Exams Over!";
+                document.getElementById('exam-name').innerText = "Success!";
+                document.getElementById('timer').style.color = "var(--success)";
             }
         }
         setInterval(updateUI, 1000);

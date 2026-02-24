@@ -3,36 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HSE Exam Dashboard 2026</title>
+    <title>HSE Plus Two Countdown 2026</title>
     <style>
         :root {
             --primary: #2563eb;
             --accent: #d9534f;
             --bg: #f8fafc;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); display: flex; flex-direction: column; align-items: center; padding: 20px; color: #333; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
         
-        .card { background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; width: 100%; max-width: 500px; margin-bottom: 30px; border-top: 5px solid var(--primary); }
-        #exam-name { font-size: 1.2rem; color: #64748b; margin-bottom: 5px; }
-        #timer { font-size: 2.5rem; font-weight: 800; color: var(--accent); letter-spacing: -1px; }
+        .card { background: white; padding: 1.5rem; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; width: 100%; max-width: 450px; margin-bottom: 20px; border-top: 6px solid var(--primary); box-sizing: border-box; }
+        #timer { font-size: 2.2rem; font-weight: 800; color: var(--accent); letter-spacing: -1px; margin: 10px 0; }
+        #exam-name { font-size: 1.1rem; color: #64748b; font-weight: 500; }
 
-        .table-container { width: 100%; max-width: 700px; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); overflow: hidden; }
+        .table-container { width: 100%; max-width: 600px; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); overflow: hidden; border: 1px solid #e2e8f0; }
         table { border-collapse: collapse; width: 100%; }
-        th, td { padding: 16px; text-align: left; border-bottom: 1px solid #edf2f7; }
-        th { background-color: var(--primary); color: white; font-weight: 600; text-transform: uppercase; font-size: 0.85rem; }
-        
-        /* Highlight the next upcoming exam */
-        .next-exam-row { background-color: #eff6ff !important; border-left: 4px solid var(--primary); font-weight: 600; }
-        .completed { opacity: 0.5; text-decoration: line-through; background-color: #f1f5f9; }
-        .days-tag { font-size: 0.8rem; padding: 4px 8px; border-radius: 20px; background: #e2e8f0; color: #475569; }
+        th { background: var(--primary); color: white; padding: 12px; text-align: left; font-size: 0.8rem; text-transform: uppercase; }
+        td { padding: 12px; border-bottom: 1px solid #edf2f7; font-size: 0.9rem; }
+
+        .next-exam-row { background-color: #eff6ff !important; font-weight: 600; }
+        .days-tag { font-size: 0.7rem; padding: 4px 8px; border-radius: 12px; background: #f1f5f9; white-space: nowrap; display: inline-block; }
+        .next-exam-row .days-tag { background: var(--primary); color: white; }
+
+        @media (max-width: 480px) {
+            #timer { font-size: 1.8rem; }
+            td, th { padding: 10px 8px; font-size: 0.85rem; }
+        }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h2>HSE Exam Countdown</h2>
+        <h2>Plus Two Exam Countdown</h2>
         <div id="exam-name">Loading...</div>
-        <div id="timer">00:00:00:00</div>
+        <div id="timer">00d 00h 00m 00s</div>
     </div>
 
     <div class="table-container">
@@ -49,6 +53,7 @@
     </div>
 
     <script>
+        // Data strictly for Plus Two exams only
         const exams = [
             { date: "2026-03-10T09:00:00", name: "Business Studies" },
             { date: "2026-03-12T09:00:00", name: "Second Language" },
@@ -61,52 +66,41 @@
         function updateUI() {
             const now = new Date();
             const tableBody = document.getElementById('table-body');
-            
-            // Find the next upcoming exam
             let nextExam = exams.find(e => new Date(e.date) > now);
 
-            // Only redraw table if needed (once a minute or on load)
             if (tableBody.innerHTML === "" || now.getSeconds() === 0) {
                 tableBody.innerHTML = '';
                 exams.forEach(e => {
                     const examDate = new Date(e.date);
                     const isNext = nextExam && e.name === nextExam.name;
-                    const isPast = examDate < now && !isNext;
+                    const isPast = examDate < now;
+                    const diffTime = examDate - now;
+                    const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                     
-                    let statusText = "";
-                    if (isPast) statusText = "Finished";
-                    else {
-                        const daysLeft = Math.ceil((examDate - now) / (1000 * 60 * 60 * 24));
-                        statusText = `<span class="days-tag">${daysLeft} days to go</span>`;
-                    }
-
-                    const row = `<tr class="${isNext ? 'next-exam-row' : ''} ${isPast ? 'completed' : ''}">
-                        <td>${examDate.toLocaleDateString('en-GB')}</td>
-                        <td>${e.name}</td>
-                        <td>${statusText}</td>
-                    </tr>`;
-                    tableBody.innerHTML += row;
+                    let status = isPast ? "Done" : `<span class="days-tag">${daysLeft}d left</span>`;
+                    
+                    tableBody.innerHTML += `
+                        <tr class="${isNext ? 'next-exam-row' : ''}" style="${isPast ? 'opacity:0.5' : ''}">
+                            <td>${examDate.getDate()} March</td>
+                            <td>${e.name}</td>
+                            <td>${status}</td>
+                        </tr>`;
                 });
             }
 
-            // Countdown Logic
             if (nextExam) {
-                const target = new Date(nextExam.date).getTime();
-                const diff = target - now.getTime();
-
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((diff % (1000 * 60)) / 1000);
-
+                const diff = new Date(nextExam.date) - now;
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
                 document.getElementById('timer').innerText = `${d}d ${h}h ${m}m ${s}s`;
                 document.getElementById('exam-name').innerText = "Next: " + nextExam.name;
             } else {
-                document.getElementById('timer').innerText = "All Exams Done!";
-                document.getElementById('exam-name').innerText = "Congratulations";
+                document.getElementById('timer').innerText = "Exams Finished!";
+                document.getElementById('exam-name').innerText = "Congratulations!";
             }
         }
-
         setInterval(updateUI, 1000);
         updateUI();
     </script>

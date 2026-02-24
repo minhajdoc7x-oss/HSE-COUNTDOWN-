@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>HSE Plus Two Countdown 2026</title>
-    <meta name="description" content="Official Kerala Plus Two Exam Countdown 2026. Live timer and subject-wise exam schedule for HSE students.">
-    
     <style>
         :root {
             --primary: #4e73df;
@@ -18,147 +16,49 @@
 
         body { 
             font-family: 'Poppins', system-ui, -apple-system, sans-serif; 
-            margin: 0; 
-            padding: 15px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            min-height: 100vh;
+            margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
             background-color: #f8fafc;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(78, 115, 223, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(28, 200, 138, 0.08) 0px, transparent 50%);
-            position: relative;
-            overflow-x: hidden;
+            background-image: radial-gradient(at 0% 0%, rgba(78, 115, 223, 0.12) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(28, 200, 138, 0.08) 0px, transparent 50%);
+            position: relative; overflow-x: hidden;
         }
 
         /* BACKGROUND ANIMATION */
         body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234e73df' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             animation: slideIllustration 60s linear infinite;
         }
 
-        @keyframes slideIllustration {
-            from { background-position: 0 0; }
-            to { background-position: 500px 500px; }
-        }
+        @keyframes slideIllustration { from { background-position: 0 0; } to { background-position: 500px 500px; } }
 
-        /* AUDIO CONTROLLER */
-        .audio-wrapper {
-            margin-bottom: 20px;
-        }
-
-        #music-btn {
-            background: var(--white);
-            border: 1px solid rgba(78, 115, 223, 0.3);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--primary);
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: 0.3s;
-        }
-
-        #music-btn.playing {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(78, 115, 223, 0.3);
-        }
-        
         /* CARD STYLING */
         .card { 
-            background: var(--white); 
-            backdrop-filter: blur(12px);
-            padding: 1.5rem 1rem; 
-            border-radius: 24px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06); 
-            text-align: center; 
-            width: 100%; 
-            max-width: 400px; 
-            margin-bottom: 20px; 
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-top: 6px solid var(--primary); 
+            background: var(--white); backdrop-filter: blur(12px); padding: 1.5rem 1rem; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); text-align: center; width: 100%; max-width: 400px; margin-top: 20px; margin-bottom: 20px; border: 1px solid rgba(255, 255, 255, 0.4); border-top: 6px solid var(--primary); 
         }
         
-        #timer { 
-            font-size: 2.2rem;
-            font-weight: 800; 
-            color: var(--accent); 
-            letter-spacing: -1px; 
-            margin: 10px 0;
-            font-variant-numeric: tabular-nums;
-        }
-        
-        #exam-name { 
-            font-size: 0.9rem; 
-            color: #4e73df; 
-            font-weight: 700; 
-            background: rgba(78, 115, 223, 0.1);
-            padding: 6px 16px;
-            border-radius: 50px;
-            display: inline-block;
-        }
+        #timer { font-size: 2.2rem; font-weight: 800; color: var(--accent); letter-spacing: -1px; margin: 10px 0; font-variant-numeric: tabular-nums; }
+        #exam-name { font-size: 0.9rem; color: #4e73df; font-weight: 700; background: rgba(78, 115, 223, 0.1); padding: 6px 16px; border-radius: 50px; display: inline-block; }
 
         /* TABLE STYLING */
-        .table-container { 
-            width: 100%; 
-            max-width: 400px; 
-            background: var(--white);
-            backdrop-filter: blur(12px);
-            border-radius: 20px; 
-            box-shadow: 0 8px 24px rgba(0,0,0,0.04); 
-            overflow: hidden; 
-            border: 1px solid rgba(255, 255, 255, 0.4); 
-        }
-        
+        .table-container { width: 100%; max-width: 400px; background: var(--white); backdrop-filter: blur(12px); border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.04); overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.4); }
         table { border-collapse: collapse; width: 100%; }
         th { background: rgba(248, 249, 252, 0.5); color: #4e73df; padding: 15px 10px; text-align: left; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; }
         td { padding: 14px 10px; border-bottom: 1px solid rgba(0,0,0,0.03); font-size: 0.85rem; color: #444; }
-
         .next-exam-row { background-color: rgba(78, 115, 223, 0.05) !important; font-weight: 700; }
         .days-tag { font-size: 0.65rem; padding: 4px 10px; border-radius: 12px; background: #f1f5f9; font-weight: 600; }
         .next-exam-row .days-tag { background: var(--success); color: white; }
 
         /* FOOTER */
         .footer-section { margin-top: 30px; text-align: center; width: 100%; padding-bottom: 20px; }
-        .bounce-box span {
-            font-size: 22px;
-            color: var(--primary);
-            font-weight: 900;
-            display: inline-block;
-            animation: smoothBounce 0.8s infinite alternate;
-        }
-        @keyframes smoothBounce {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-8px); }
-        }
-
-        @media (max-width: 350px) {
-            #timer { font-size: 1.8rem; }
-        }
+        .bounce-box span { font-size: 22px; color: var(--primary); font-weight: 900; display: inline-block; animation: smoothBounce 0.8s infinite alternate; }
+        @keyframes smoothBounce { 0% { transform: translateY(0); } 100% { transform: translateY(-8px); } }
     </style>
 </head>
 <body>
 
-    <audio id="bg-audio" loop preload="auto">
-        <source src="samayam-sheriyallaa-follow-malayalam-viral-akkuveeee_qGlyebce.mp3"type="audio/mpeg">
+    <audio id="bg-audio" autoplay loop muted playsinline>
+        <source src="samayam-sheriyallaa-follow-malayalam-viral-akkuveeee_qGlyebce.mp3" type="audio/mpeg">
     </audio>
-
-    <div class="audio-wrapper">
-        <button id="music-btn" onclick="toggleMusic()">
-            <span id="btn-icon">▶</span> <span id="btn-text">Play Theme</span>
-        </button>
-    </div>
 
     <div class="card">
         <h2>Exam Countdown 2026</h2>
@@ -194,34 +94,25 @@
 
     <script>
         const audio = document.getElementById('bg-audio');
-        const musicBtn = document.getElementById('music-btn');
-        const btnIcon = document.getElementById('btn-icon');
-        const btnText = document.getElementById('btn-text');
 
-        // AUDIO TOGGLE FUNCTION
-        function toggleMusic() {
-            if (audio.paused) {
+        // FORCE START ON FIRST TOUCH (Necessary for Browsers)
+        document.body.addEventListener('click', () => {
+            if (audio.muted) {
+                audio.muted = false;
                 audio.play();
-                musicBtn.classList.add('playing');
-                btnIcon.innerText = "⏸";
-                btnText.innerText = "Music On";
-            } else {
-                audio.pause();
-                musicBtn.classList.remove('playing');
-                btnIcon.innerText = "▶";
-                btnText.innerText = "Play Theme";
             }
-        }
+        }, { once: true });
 
-        // SEAMLESS LOOP FIX
+        // SEAMLESS REPEAT
         audio.addEventListener('timeupdate', function(){
-            var buffer = 0.44; // Small buffer for seamless loop
+            var buffer = 0.44; 
             if(this.currentTime > this.duration - buffer){
                 this.currentTime = 0;
                 this.play();
             }
         });
 
+        // COUNTDOWN LOGIC
         const exams = [
             { date: "2026-03-10T09:30:00", name: "Business Studies" },
             { date: "2026-03-12T09:30:00", name: "Second Language" },
@@ -268,7 +159,6 @@
                 document.getElementById('exam-name').innerText = "Target: " + nextExam.name;
             } else {
                 document.getElementById('timer').innerText = "All Exams Over!";
-                document.getElementById('timer').style.color = "var(--success)";
             }
         }
         setInterval(updateUI, 1000);

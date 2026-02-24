@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>HSE Plus Two Countdown 2026</title>
     <style>
         :root {
@@ -11,55 +11,60 @@
             --success: #1cc88a;
             --bg: #f8fafc;
         }
+
+        * { box-sizing: border-box; } /* Prevents padding from breaking width */
+
         body { 
             font-family: 'Poppins', system-ui, -apple-system, sans-serif; 
             background: var(--bg); 
             margin: 0; 
-            padding: 15px; 
+            padding: 10px; /* Reduced padding for mobile */
             display: flex; 
             flex-direction: column; 
             align-items: center; 
+            min-height: 100vh;
         }
         
         /* Main Timer Card */
         .card { 
             background: white; 
-            padding: 2rem; 
+            padding: 1.5rem 1rem; 
             border-radius: 20px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
             text-align: center; 
             width: 100%; 
-            max-width: 450px; 
-            margin-bottom: 25px; 
+            max-width: 400px; 
+            margin-bottom: 20px; 
             border-top: 6px solid var(--primary); 
-            box-sizing: border-box; 
         }
         
-        h2 { color: #333; margin-top: 0; font-size: 1.5rem; }
+        h2 { color: #333; margin-top: 0; font-size: 1.3rem; }
         
         #timer { 
-            font-size: 2.5rem; 
+            font-size: 2rem; /* Scaled down for mobile */
             font-weight: 800; 
             color: var(--accent); 
-            letter-spacing: -1px; 
-            margin: 15px 0;
+            letter-spacing: -0.5px; 
+            margin: 10px 0;
             font-variant-numeric: tabular-nums;
+            white-space: nowrap;
         }
         
         #exam-name { 
-            font-size: 1.1rem; 
+            font-size: 0.95rem; 
             color: #4e73df; 
             font-weight: 700; 
             background: #f0f3ff;
-            padding: 5px 15px;
+            padding: 5px 12px;
             border-radius: 50px;
             display: inline-block;
+            max-width: 90%;
         }
 
         /* Table Styling */
         .table-container { 
             width: 100%; 
-            max-width: 500px; 
+            max-width: 400px; 
             background: white; 
             border-radius: 16px; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
@@ -67,35 +72,38 @@
             border: 1px solid #e2e8f0; 
         }
         
-        table { border-collapse: collapse; width: 100%; }
-        th { background: #f8f9fc; color: #4e73df; padding: 15px; text-align: left; font-size: 0.75rem; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; }
-        td { padding: 14px 15px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; color: #444; }
+        table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+        th { background: #f8f9fc; color: #4e73df; padding: 12px 10px; text-align: left; font-size: 0.65rem; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 12px 10px; border-bottom: 1px solid #f1f5f9; font-size: 0.85rem; color: #444; word-wrap: break-word; }
+
+        /* Column Widths */
+        th:nth-child(1), td:nth-child(1) { width: 25%; }
+        th:nth-child(2), td:nth-child(2) { width: 45%; }
+        th:nth-child(3), td:nth-child(3) { width: 30%; text-align: right; }
 
         .next-exam-row { background-color: #f0f7ff !important; font-weight: 700; }
-        .days-tag { font-size: 0.7rem; padding: 4px 10px; border-radius: 12px; background: #f1f5f9; font-weight: 600; }
+        .days-tag { font-size: 0.65rem; padding: 3px 8px; border-radius: 10px; background: #f1f5f9; font-weight: 600; white-space: nowrap; }
         .next-exam-row .days-tag { background: var(--success); color: white; }
 
-        /* Smooth Wave Animation for Footer */
+        /* Footer Section */
         .footer-section {
-            margin-top: 30px;
+            margin-top: 20px;
             text-align: center;
             width: 100%;
-            max-width: 450px;
+            padding-bottom: 20px;
         }
         
-        .divider { height: 1.5px; width: 80%; background: #ddd; margin: 20px auto; }
+        .divider { height: 1px; width: 60%; background: #eee; margin: 15px auto; }
 
-        .bounce-box { margin: 15px 0; }
+        .bounce-box { margin: 10px 0; }
         .bounce-box span {
-            font-size: 24px;
+            font-size: 20px;
             color: var(--primary);
             font-weight: 900;
-            font-family: 'Arial Black', sans-serif;
             display: inline-block;
             animation: smoothBounce 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
         }
 
-        /* Staggered wave timing */
         .bounce-box span:nth-child(2) { animation-delay: 0.1s; }
         .bounce-box span:nth-child(3) { animation-delay: 0.2s; }
         .bounce-box span:nth-child(4) { animation-delay: 0.3s; }
@@ -103,13 +111,14 @@
         .bounce-box span:nth-child(6) { animation-delay: 0.5s; }
 
         @keyframes smoothBounce {
-            0% { transform: translateY(0); text-shadow: 0 0px 0 #ccc; }
-            100% { transform: translateY(-10px); text-shadow: 0 1px 0 #ccc, 0 5px 10px rgba(0,0,0,0.1); }
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-8px); text-shadow: 0 5px 10px rgba(0,0,0,0.1); }
         }
 
-        @media (max-width: 480px) {
-            #timer { font-size: 2rem; }
-            .card { padding: 1.2rem; }
+        /* Specific fix for very small screens (iPhone SE etc) */
+        @media (max-width: 350px) {
+            #timer { font-size: 1.6rem; }
+            td, th { font-size: 0.75rem; padding: 8px 5px; }
         }
     </style>
 </head>
@@ -125,9 +134,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>Exam Date</th>
+                    <th>Date</th>
                     <th>Subject</th>
-                    <th>Status</th>
+                    <th style="text-align: right;">Status</th>
                 </tr>
             </thead>
             <tbody id="table-body"></tbody>
@@ -136,12 +145,11 @@
 
     <div class="footer-section">
         <div class="divider"></div>
-        <div style="font-size: 12px; color: #888; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">Developed By</div>
+        <div style="font-size: 10px; color: #888; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">Developed By</div>
         <div class="bounce-box">
             <span>M</span><span>I</span><span>N</span><span>H</span><span>A</span><span>J</span>
         </div>
-        <div style="color: #666; font-size: 13px; font-weight: 600;">Plus Two Result Portal &copy; 2026</div>
-        <div class="divider"></div>
+        <div style="color: #666; font-size: 12px; font-weight: 600;">Plus Two Result Portal &copy; 2026</div>
     </div>
 
     <script>
@@ -149,7 +157,7 @@
             { date: "2026-03-10T09:30:00", name: "Business Studies" },
             { date: "2026-03-12T09:30:00", name: "Second Language" },
             { date: "2026-03-19T09:30:00", name: "Economics" },
-            { date: "2026-03-24T09:30:00", name: "Computer Application" },
+            { date: "2026-03-24T09:30:00", name: "Computer App." },
             { date: "2026-03-26T09:30:00", name: "Accountancy" },
             { date: "2026-03-28T09:30:00", name: "English (Part I)" }
         ];
@@ -159,8 +167,8 @@
             const tableBody = document.getElementById('table-body');
             let nextExam = exams.find(e => new Date(e.date) > now);
 
-            // Update table only when needed
-            if (tableBody.innerHTML === "" || now.getSeconds() === 0) {
+            // Using a simple flag to prevent unnecessary redraws every second
+            if (tableBody.dataset.lastUpdate !== now.getMinutes().toString()) {
                 tableBody.innerHTML = '';
                 exams.forEach(e => {
                     const examDate = new Date(e.date);
@@ -169,15 +177,16 @@
                     const diffTime = examDate - now;
                     const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                     
-                    let status = isPast ? "<span style='color:#94a3b8'>Completed</span>" : `<span class="days-tag">${daysLeft} days to go</span>`;
+                    let status = isPast ? "<span style='color:#94a3b8'>Done</span>" : `<span class="days-tag">${daysLeft}d to go</span>`;
                     
                     tableBody.innerHTML += `
                         <tr class="${isNext ? 'next-exam-row' : ''}" style="${isPast ? 'opacity:0.5' : ''}">
-                            <td>${examDate.getDate()} March</td>
+                            <td>${examDate.getDate()} Mar</td>
                             <td>${e.name}</td>
-                            <td>${status}</td>
+                            <td style="text-align: right;">${status}</td>
                         </tr>`;
                 });
+                tableBody.dataset.lastUpdate = now.getMinutes().toString();
             }
 
             if (nextExam) {
@@ -187,13 +196,8 @@
                 const m = Math.floor((diff % 3600000) / 60000);
                 const s = Math.floor((diff % 60000) / 1000);
                 
-                // Adding leading zeros for a cleaner look
-                const displayD = d.toString().padStart(2, '0');
-                const displayH = h.toString().padStart(2, '0');
-                const displayM = m.toString().padStart(2, '0');
-                const displayS = s.toString().padStart(2, '0');
-                
-                document.getElementById('timer').innerText = `${displayD}d ${displayH}h ${displayM}m ${displayS}s`;
+                document.getElementById('timer').innerText = 
+                    `${d.toString().padStart(2, '0')}d ${h.toString().padStart(2, '0')}h ${m.toString().padStart(2, '0')}m ${s.toString().padStart(2, '0')}s`;
                 document.getElementById('exam-name').innerText = "Target: " + nextExam.name;
             } else {
                 document.getElementById('timer').innerText = "All Exams Over!";

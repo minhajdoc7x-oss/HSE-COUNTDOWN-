@@ -25,7 +25,6 @@
             align-items: center; 
             min-height: 100vh;
             background-color: #f8fafc;
-            /* Gradient Base */
             background-image: 
                 radial-gradient(at 0% 0%, rgba(78, 115, 223, 0.12) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(28, 200, 138, 0.08) 0px, transparent 50%);
@@ -33,7 +32,6 @@
             overflow-x: hidden;
         }
 
-        /* ILLUSTRATION ANIMATION LAYER */
         body::before {
             content: "";
             position: fixed;
@@ -42,7 +40,6 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            /* Academic pattern illustration */
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234e73df' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             animation: slideIllustration 60s linear infinite;
         }
@@ -52,7 +49,6 @@
             to { background-position: 500px 500px; }
         }
         
-        /* Premium Glass Card */
         .card { 
             background: var(--white); 
             backdrop-filter: blur(12px);
@@ -113,10 +109,21 @@
         .days-tag { font-size: 0.65rem; padding: 4px 10px; border-radius: 12px; background: #f1f5f9; font-weight: 600; }
         .next-exam-row .days-tag { background: var(--success); color: white; box-shadow: 0 4px 10px rgba(28, 200, 138, 0.2); }
 
-        .footer-section { margin-top: 30px; text-align: center; width: 100%; padding-bottom: 20px; }
+        .footer-section { margin-top: 30px; text-align: center; width: 100%; padding-bottom: 20px; display: flex; flex-direction: column; align-items: center; }
         .divider { height: 1px; width: 50%; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent); margin: 15px auto; }
 
-        .bounce-box { margin: 10px 0; }
+        /* USER PHOTO STYLE */
+        .user-photo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        .bounce-box { margin: 5px 0; }
         .bounce-box span {
             font-size: 22px;
             color: var(--primary);
@@ -165,6 +172,9 @@
 
     <div class="footer-section">
         <div class="divider"></div>
+        
+       <img src="myphoto.png" class="user-photo" alt="Minhaj">
+
         <div style="font-size: 10px; color: #888; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">Developed By</div>
         <div class="bounce-box">
             <span>M</span><span>I</span><span>N</span><span>H</span><span>A</span><span>J</span>

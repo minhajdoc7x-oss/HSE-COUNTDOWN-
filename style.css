@@ -1,13 +1,14 @@
 /* Heartbeat Animation */
 @keyframes heartbeat {
     0% { transform: scale(1); }
-    14% { transform: scale(1.05); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.05); }
+    15% { transform: scale(1.05); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.05); }
     70% { transform: scale(1); }
 }
 
+/* ഈ ക്ലാസ് ഉള്ള ഡിവിഷൻ ആനിമേറ്റ് ചെയ്യും */
 .heartbeat-active {
-    animation: heartbeat 1.5s ease-in-out infinite;
-    border-color: var(--accent) !important; /* ആനിമേഷൻ സമയത്ത് ബോർഡർ കളർ മാറാൻ */
+    animation: heartbeat 1.5s ease-in-out infinite !important;
+    display: block; /* കാർഡ് കാണുന്നുണ്ടെന്ന് ഉറപ്പാക്കാൻ */
 }
